@@ -331,6 +331,30 @@
       color: var(--muted);
     }
 
+    .chair-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .chair-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 253, 248, .72);
+    }
+
+    .chair-card strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .chair-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -464,6 +488,8 @@
       .speaker-photo {
         border-radius: 12px;
       }
+
+      .chair-grid { grid-template-columns: 1fr; }
 
       .info-grid { grid-template-columns: 1fr; }
     }
@@ -707,10 +733,6 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Speakers</h2>
-          <p class="section-intro">
-            Each speaker card is set up for a photograph, affiliation, talk title, abstract, and
-            short biography. The abstract and biography expand on click to keep the page compact.
-          </p>
         </div>
 
         <div class="speaker-grid">
@@ -921,14 +943,15 @@
     <section id="chair">
       <div class="wrap">
         <div class="section-head">
-          <h2>Workshop chair</h2>
+          <h2>Workshop chairs</h2>
           <p class="section-intro">
-            Scientific organisation and workshop coordination.
+            Scientific organisation and workshop coordination. For questions about participation,
+            contact <a href="mailto:fim@di.ku.dk">fim@di.ku.dk</a>.
           </p>
         </div>
 
-        <div class="info-grid">
-          <div>
+        <div class="chair-grid">
+          <div class="chair-card">
             <strong>Frederikke Isa Marin</strong>
             <p>
               Postdoctoral Researcher · Machine Learning<br>
@@ -937,14 +960,21 @@
             </p>
           </div>
 
-          <div>
-            <strong>Contact</strong>
-            <p><a href="mailto:fim@di.ku.dk">fim@di.ku.dk</a></p>
+          <div class="chair-card">
+            <strong>Ole Winther</strong>
+            <p>
+              Professor · DTU Compute, Technical University of Denmark<br>
+              Professor · Department of Biology, University of Copenhagen
+            </p>
           </div>
 
-          <div>
-            <strong>Workshop</strong>
-            <p>Biological Foundation Models and the Virtual Cell<br>21 September 2026</p>
+          <div class="chair-card">
+            <strong>Wouter Boomsma</strong>
+            <p>
+              Professor · Machine Learning<br>
+              Department of Computer Science<br>
+              University of Copenhagen
+            </p>
           </div>
         </div>
       </div>
