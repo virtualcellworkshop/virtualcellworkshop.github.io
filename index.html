@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Preview mode: remove these directives when the event should be discoverable. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+
+  <meta name="description" content="A closed one-day workshop on computational representations of cellular systems, biological foundation models, benchmarking, and evaluation.">
+  <title>Biological Foundation Models and the Virtual Cell · 21 September 2026</title>
+
+  <style>
+    :root {
+      --bg: #f5f4ef;
+      --paper: #fffdf8;
+      --ink: #17201b;
+      --muted: #667069;
+      --green: #315c48;
+      --green-soft: #e4ece7;
+      --orange: #a75f37;
+      --line: #d9ddd8;
+      --shadow: 0 18px 48px rgba(23, 32, 27, .075);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(49,92,72,.09), transparent 34rem),
+        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.62;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    header { padding-top: 24px; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 13px 0 19px;
+      border-bottom: 1px solid var(--line);
+      font-size: .94rem;
+    }
+
+    .brand {
+      font-weight: 780;
+      letter-spacing: -.02em;
+      text-decoration: none;
+    }
+
+    .links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .links a:hover,
+    .links a:focus-visible {
+      color: var(--green);
+    }
+
+    .hero {
+      margin: 24px 0 76px;
+      padding: 74px 54px 72px;
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        linear-gradient(90deg, rgba(16, 29, 22, .82) 0%, rgba(16, 29, 22, .61) 54%, rgba(16, 29, 22, .22) 100%),
+        url("https://www.aicentre.dk/api/media/file/Ostervold_Observatory_and_statue-2.jpg")
+        center 44% / cover no-repeat;
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      color: #fff;
+      text-shadow: 0 2px 22px rgba(0,0,0,.18);
+    }
+
+    .hero .eyebrow {
+      color: #e3eee7;
+    }
+
+    .hero .hero-copy {
+      color: rgba(255,255,255,.88);
+    }
+
+    .hero .fact {
+      color: #fff;
+      border-color: rgba(255,255,255,.34);
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(5px);
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--green);
+      font-size: .78rem;
+      font-weight: 850;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 900px;
+      margin: 0 0 26px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.2rem, 8.2vw, 7rem);
+      font-weight: 500;
+      line-height: .94;
+      letter-spacing: -.05em;
+    }
+
+    .hero-copy {
+      max-width: 790px;
+      margin: 0 0 32px;
+      color: var(--muted);
+      font-size: clamp(1.06rem, 2vw, 1.27rem);
+    }
+
+    .facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .fact {
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,253,248,.7);
+      font-size: .92rem;
+    }
+
+    main section {
+      padding: 76px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: 44px;
+      margin-bottom: 38px;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.35rem, 5vw, 4.25rem);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -.04em;
+    }
+
+    .section-intro {
+      max-width: 730px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .scope {
+      max-width: 900px;
+      font-size: 1.06rem;
+    }
+
+    .scope p { margin-bottom: 1.2em; }
+
+    .scope p:last-child { margin-bottom: 0; }
+
+    .notice {
+      margin-top: 30px;
+      padding: 17px 20px;
+      border-left: 4px solid var(--green);
+      border-radius: 0 14px 14px 0;
+      background: var(--green-soft);
+      color: #34473d;
+    }
+
+    .schedule {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .slot {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 26px;
+      align-items: start;
+      padding: 23px 28px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .slot:last-child { border-bottom: 0; }
+
+    .slot.meal { background: var(--green-soft); }
+
+    .time {
+      color: var(--green);
+      font-weight: 820;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .slot h3 {
+      margin-bottom: 4px;
+      font-size: 1.03rem;
+      line-height: 1.38;
+    }
+
+    .slot p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .93rem;
+    }
+
+    .tag {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #f0ede6;
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .meal .tag {
+      background: rgba(255,255,255,.72);
+      color: var(--green);
+    }
+
+    .speaker-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .speaker {
+      display: grid;
+      grid-template-columns: 185px 1fr;
+      gap: 34px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .speaker-photo {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #e8e8e2;
+    }
+
+    .speaker-kicker {
+      margin-bottom: 6px;
+      color: var(--orange);
+      font-size: .74rem;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .speaker h3 {
+      margin-bottom: 3px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.85rem, 3vw, 2.65rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -.025em;
+    }
+
+    .affiliation {
+      margin-bottom: 17px;
+      color: var(--muted);
+    }
+
+    .talk-title {
+      margin-bottom: 17px;
+      font-size: 1.1rem;
+      font-weight: 760;
+    }
+
+    details {
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    details:last-child { padding-bottom: 0; }
+
+    summary {
+      cursor: pointer;
+      color: var(--green);
+      font-weight: 760;
+    }
+
+    details p {
+      margin: 11px 0 0;
+      color: var(--muted);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-grid > div {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,253,248,.72);
+    }
+
+    .info-grid strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .info-grid p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    footer {
+      padding: 36px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+
+    .links .signup-link {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 780;
+    }
+
+    .links .signup-link:hover,
+    .links .signup-link:focus-visible {
+      color: #fff;
+      background: #254a3a;
+    }
+
+    .signup-section {
+      padding: 0 0 76px;
+      border-top: 0;
+    }
+
+    .signup-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: center;
+      padding: 30px 34px;
+      border: 1px solid #b8c9bf;
+      border-radius: var(--radius);
+      background: var(--green-soft);
+      box-shadow: var(--shadow);
+    }
+
+    .signup-box .eyebrow {
+      margin-bottom: 7px;
+    }
+
+    .signup-box h2 {
+      margin: 0 0 9px;
+      font-size: clamp(2rem, 4vw, 3.15rem);
+    }
+
+    .signup-box p {
+      max-width: 720px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .signup-button {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      font-weight: 780;
+      text-decoration: none;
+      white-space: nowrap;
+      opacity: .72;
+    }
+
+    @media (max-width: 760px) {
+      .signup-box {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px;
+      }
+
+      .signup-button {
+        justify-self: start;
+      }
+
+      .hero {
+        margin-top: 18px;
+        padding: 54px 26px 48px;
+        min-height: 440px;
+        background-position: 58% center;
+      }
+
+      .section-head {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .slot {
+        grid-template-columns: 80px 1fr;
+        gap: 18px;
+        padding: 20px;
+      }
+
+      .slot .tag {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .speaker {
+        grid-template-columns: 92px 1fr;
+        gap: 18px;
+        padding: 20px;
+      }
+
+      .speaker-photo {
+        border-radius: 12px;
+      }
+
+      .info-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .speaker { grid-template-columns: 1fr; }
+
+      .speaker-photo {
+        width: 120px;
+        aspect-ratio: 1 / 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="wrap">
+    <nav aria-label="Primary navigation">
+      <a class="brand" href="#">Biological Foundation Models and the Virtual Cell</a>
+      <div class="links">
+        <a class="signup-link" href="#signup">Invitation only</a>
+        <a href="#scope">Scope</a>
+        <a href="#program">Program</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#chair">Chair</a>
+        <a href="#practical">Practical</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <p class="eyebrow">Closed one-day workshop</p>
+      <h1>Biological Foundation Models and the Virtual Cell</h1>
+      <p class="hero-copy">
+        Models, benchmarks, and evaluation toward increasingly predictive and mechanistic
+        computational representations of the cell.
+      </p>
+
+      <div class="facts" aria-label="Event details">
+        <span class="fact">Monday, 21 September 2026</span>
+        <span class="fact">From 10:30</span>
+        <span class="fact">Pioneer Centre · Copenhagen</span>
+        <span class="fact">Invitation only</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="signup-section" id="signup">
+      <div class="wrap">
+        <div class="signup-box">
+          <div>
+            <p class="eyebrow">Participation</p>
+            <h2>Invitation only</h2>
+            <p>
+              This is a closed workshop and participation is by invitation only. If you have a question about attendance, please get in touch.
+            </p>
+          </div>
+          <a class="signup-button" href="mailto:fim@di.ku.dk">Email fim@di.ku.dk</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="scope">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Scope</h2>
+          <p class="section-intro">
+            The workshop takes a broad view of the “virtual cell” as an emerging grand challenge
+            for modern computational biology.
+          </p>
+        </div>
+
+        <div class="scope">
+          <p>
+            The term “virtual cell” is sometimes used narrowly to describe models that predict how
+            cells respond to gene knockouts or drug perturbations. Here, we use it more broadly:
+            as an evolving effort to build increasingly accurate computational representations of
+            cellular systems, spanning genes, proteins, regulatory networks, and higher-order
+            biological processes.
+          </p>
+
+          <p>
+            Realising this vision will require advances not only in model development, but also in
+            how progress is measured. Rigorous benchmarking, evaluation frameworks, and shared
+            datasets are essential for understanding the capabilities and limitations of biological
+            foundation models, comparing approaches across modalities, and identifying meaningful
+            milestones toward increasingly predictive and mechanistic representations of the cell.
+          </p>
+
+          <p>
+            By emphasizing both modeling and evaluation, the workshop aims to develop a clearer
+            picture of where the field stands today and what advances are needed to move closer to
+            a practical virtual cell.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="program">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Program</h2>
+          <p class="section-intro">
+            The final program is forthcoming. The outline below reflects the planned shape of the day
+            and can be updated as speakers and talk titles are confirmed.
+          </p>
+        </div>
+
+        <div class="schedule">
+          <div class="slot meal">
+            <div class="time">10:30</div>
+            <div>
+              <h3>Arrival &amp; coffee</h3>
+              <p>Informal arrival.</p>
+            </div>
+            <span class="tag">Welcome</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">10:50–11:00</div>
+            <div>
+              <h3>Welcome &amp; introduction</h3>
+              <p>Workshop framing and objectives.</p>
+            </div>
+            <span class="tag">Opening</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">11:00–11:30</div>
+            <div>
+              <h3>Henrik Nielsen · Talk title forthcoming</h3>
+              <p>Short invited talk.</p>
+            </div>
+            <span class="tag">Talk</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">11:30–12:20</div>
+            <div>
+              <h3>Altos Labs · Speaker and title forthcoming</h3>
+              <p>Invited talk and discussion.</p>
+            </div>
+            <span class="tag">Talk</span>
+          </div>
+
+          <div class="slot meal">
+            <div class="time">12:30–13:30</div>
+            <div>
+              <h3>Lunch</h3>
+              <p>Lunch is included for invited participants.</p>
+            </div>
+            <span class="tag">Meal</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">13:30–14:00</div>
+            <div>
+              <h3>Jakob Skou Pedersen · Detecting cancer from blood samples — promises and challenges of generative models for cell-free DNA</h3>
+              <p>Short invited talk.</p>
+            </div>
+            <span class="tag">Talk</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">14:00–14:50</div>
+            <div>
+              <h3>Eli Cole · GenBio AI · Talk title forthcoming</h3>
+              <p>Invited talk and discussion.</p>
+            </div>
+            <span class="tag">Talk</span>
+          </div>
+
+          <div class="slot meal">
+            <div class="time">14:50–15:20</div>
+            <div>
+              <h3>Coffee &amp; cake</h3>
+              <p>Refreshments and informal conversation.</p>
+            </div>
+            <span class="tag">Break</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">15:20–16:10</div>
+            <div>
+              <h3>Emily Jin · Ellison Institute of Technology · Monera: Learning Bacterial Biology at Full-Genome Scale</h3>
+              <p>Invited talk and discussion.</p>
+            </div>
+            <span class="tag">Talk</span>
+          </div>
+
+          <div class="slot meal">
+            <div class="time">16:10–17:30</div>
+            <div>
+              <h3>Coffee, posters &amp; discussion</h3>
+              <p>Refreshments, posters and informal scientific discussion.</p>
+            </div>
+            <span class="tag">Posters</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">18:00–18:50</div>
+            <div>
+              <h3>Fabian Theis · Talk title forthcoming</h3>
+              <p>Final invited talk of the day.</p>
+            </div>
+            <span class="tag">Talk</span>
+          </div>
+
+          <div class="slot">
+            <div class="time">18:50–19:00</div>
+            <div>
+              <h3>Closing remarks</h3>
+              <p>Summary and transition to dinner.</p>
+            </div>
+            <span class="tag">Closing</span>
+          </div>
+
+          <div class="slot meal">
+            <div class="time">19:30–20:00</div>
+            <div>
+              <h3>Workshop dinner</h3>
+              <p>Restaurant details forthcoming.</p>
+            </div>
+            <span class="tag">Dinner</span>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong>Provisional schedule.</strong> Exact talk times, speakers, titles, poster details,
+          and restaurant information can be updated as they are confirmed.
+        </div>
+      </div>
+    </section>
+
+    <section id="speakers">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Speakers</h2>
+          <p class="section-intro">
+            Each speaker card is set up for a photograph, affiliation, talk title, abstract, and
+            short biography. The abstract and biography expand on click to keep the page compact.
+          </p>
+        </div>
+
+        <div class="speaker-grid">
+
+          <article class="speaker">
+            <img class="speaker-photo" src="assets/eli-cole.jpg" alt="Eli Cole">
+            <div>
+              <p class="speaker-kicker">Invited speaker</p>
+              <h3>Eli Cole</h3>
+              <p class="affiliation">Senior Research Scientist and Team Lead · GenBio AI</p>
+              <p class="talk-title">Talk title forthcoming</p>
+
+              <details>
+                <summary>Abstract</summary>
+                <p>Abstract forthcoming.</p>
+              </details>
+
+              <details>
+                <summary>Biography</summary>
+                <p>
+                  Eli Cole is a computer scientist whose primary interests are machine learning and
+                  computer vision, with an emphasis on building machine learning systems that enable
+                  scientific discovery. He is currently a Senior Research Scientist and Team Lead at
+                  GenBio AI, where he works on large multimodal AI models for biology, particularly
+                  at the cell and tissue level.
+                </p>
+                <p>
+                  Previously, Eli was a Research Scientist at Altos Labs in Peter Kharchenko’s group,
+                  where he worked closely with experimental scientists to develop machine learning
+                  systems for discovering biologically significant cell and tissue states from data
+                  such as scRNA-seq, spatial transcriptomics, histology, IF, and IHC. He earned his
+                  Ph.D. at Caltech under Pietro Perona, focusing on computer vision, self-supervision,
+                  and spatial representation learning, and spent part of his Ph.D. working with Serge
+                  Belongie at Google Research. He also completed internships at Microsoft Research and
+                  the U.S. Air Force Research Laboratory. He received his B.S.E. from Duke University
+                  with a double major in electrical engineering and mathematics.
+                </p>
+              </details>
+            </div>
+          </article>
+
+          <article class="speaker">
+            <img class="speaker-photo" src="assets/henrik-nielsen.jpg" alt="Henrik Nielsen">
+            <div>
+              <p class="speaker-kicker">Invited speaker</p>
+              <h3>Henrik Nielsen</h3>
+              <p class="affiliation">Associate Professor · DTU Health Tech</p>
+              <p class="talk-title">Talk title forthcoming</p>
+
+              <details>
+                <summary>Abstract</summary>
+                <p>Abstract forthcoming.</p>
+              </details>
+
+              <details>
+                <summary>Biography</summary>
+                <p>
+                  Henrik Nielsen is an Associate Professor in Bioinformatics at DTU Health Tech and
+                  leads the Protein Sorting group. His research focuses on computational modelling of
+                  biological sequences and on understanding how biologically meaningful signals can be
+                  learned directly from sequence data. He has worked with neural networks for sequence
+                  modelling since the 1990s and is one of the original developers of SignalP, a widely
+                  used method for predicting signal peptides. His more recent work uses deep learning
+                  and protein language models for genomic and sequence-based prediction tasks, including
+                  the analysis of coding regions in prokaryotic DNA.
+                </p>
+              </details>
+            </div>
+          </article>
+
+          <article class="speaker">
+            <img class="speaker-photo" src="assets/emily-jin.png" alt="Emily Jin">
+            <div>
+              <p class="speaker-kicker">Invited speaker</p>
+              <h3>Emily Jin</h3>
+              <p class="affiliation">Research Scientist · AI &amp; Robotics Institute, Ellison Institute of Technology</p>
+              <p class="talk-title">“Monera: Learning Bacterial Biology at Full-Genome Scale”</p>
+
+              <details>
+                <summary>Abstract</summary>
+                <p>
+                  Foundation models can learn rich representations of genomic sequences, but many bacterial phenotypes
+                  of interest emerge from interactions distributed across the entire genome. In this talk, I will
+                  introduce Monera, a new approach that combines genomic foundation modelling with optimal transport
+                  to generate meaningful embeddings for complete prokaryotic genomes. This will also include a
+                  discussion on the challenges of sequence representation, genome-scale context, and building
+                  meaningful evaluations.
+                </p>
+              </details>
+
+              <details>
+                <summary>Biography</summary>
+                <p>
+                  Emily is a Research Scientist in the AI &amp; Robotics Institute at the Ellison Institute of
+                  Technology. She recently completed her Ph.D. in Computer Science at the University of Oxford under
+                  the supervision of Michael Bronstein and İsmail Ceylan, and in collaboration with the Quantitative
+                  Biology team at AstraZeneca. Her research focuses on developing machine learning methods to help
+                  address challenges in drug discovery, such as target identification, molecular property prediction,
+                  molecular crystal structure prediction, and DNA foundation modelling.
+                </p>
+              </details>
+            </div>
+          </article>
+
+          <article class="speaker">
+            <img class="speaker-photo" src="assets/jakob-skou-pedersen.jpg" alt="Jakob Skou Pedersen">
+            <div>
+              <p class="speaker-kicker">Invited speaker</p>
+              <h3>Jakob Skou Pedersen</h3>
+              <p class="affiliation">Professor · Department of Clinical Medicine, Molecular Medicine (MOMA) · Aarhus University</p>
+              <p class="talk-title">Detecting cancer from blood samples — promises and challenges of generative models for cell-free DNA</p>
+
+              <details>
+                <summary>Abstract</summary>
+                <p>Abstract forthcoming.</p>
+              </details>
+
+              <details>
+                <summary>Biography</summary>
+                <p>
+                  Professor Jakob Skou Pedersen’s group focuses on cancer evolution and gene regulation.
+                  The group’s research projects include the development of statistical methods and the
+                  analysis of big data, with both basic scientific and clinical applications in mind.
+                </p>
+                <p>
+                  The group uses generative AI and Bayesian statistics to model large multi-omics datasets
+                  in both basic research and translational clinical settings. They are particularly interested
+                  in the clinical potential of circulating tumour DNA.
+                </p>
+              </details>
+            </div>
+          </article>
+
+          <article class="speaker">
+            <img class="speaker-photo" src="assets/speaker-6.svg" alt="Speaker photo forthcoming for Altos Labs">
+            <div>
+              <p class="speaker-kicker">Invited speaker</p>
+              <h3>Altos Labs · Speaker forthcoming</h3>
+              <p class="affiliation">Altos Labs</p>
+              <p class="talk-title">Talk title forthcoming</p>
+
+              <details>
+                <summary>Abstract</summary>
+                <p>Abstract forthcoming.</p>
+              </details>
+
+              <details>
+                <summary>Relevant work at Altos Labs</summary>
+                <p>
+                  Researchers at Altos Labs have recently focused on both modelling and evaluating
+                  cellular responses to perturbations. PerturBench provides a standardized framework
+                  for benchmarking single-cell perturbation-response models across diverse datasets
+                  and evaluation metrics, including rank-based measures designed to expose important
+                  model failures such as mode collapse.
+                </p>
+                <p>
+                  More recently, the team developed PRiMeFlow, an end-to-end flow-matching generative
+                  model for predicting responses to genetic and small-molecule perturbations directly
+                  in gene-expression space. The model was developed and evaluated within PerturBench,
+                  and its architecture formed the basis of the Generalist Prize-winning entry in the
+                  first ARC Virtual Cell Challenge. This line of work sits directly at the intersection
+                  of virtual-cell modelling, model design, perturbation response, and biologically
+                  meaningful evaluation. The final speaker and talk topic will be confirmed shortly.
+                </p>
+              </details>
+            </div>
+          </article>
+
+          <article class="speaker">
+            <img class="speaker-photo" src="assets/fabian-theis.jpg" alt="Fabian Theis">
+            <div>
+              <p class="speaker-kicker">Invited speaker · Final talk</p>
+              <h3>Fabian Theis</h3>
+              <p class="affiliation">Head, Computational Health Center · Director, Institute of Computational Biology · Helmholtz Munich</p>
+              <p class="talk-title">Talk title forthcoming</p>
+
+              <details>
+                <summary>Abstract</summary>
+                <p>Abstract forthcoming.</p>
+              </details>
+
+              <details>
+                <summary>Biography</summary>
+                <p>
+                  Fabian Theis is a pioneer in biomedical artificial intelligence and machine learning.
+                  His research develops scalable statistical learning frameworks and biomedical
+                  foundation models for the integrative analysis of single-cell, spatial, imaging,
+                  and clinical data. A central focus of his work is multimodal data integration across
+                  biological scales, with the aim of enabling predictive and data-driven precision
+                  medicine. His lab develops widely used computational methods and open-source software,
+                  including tools in the Scanpy and scverse ecosystem.
+                </p>
+                <p>
+                  Fabian is Head of the Computational Health Center at Helmholtz Munich and Director of
+                  the Institute of Computational Biology. He is also Chair for Mathematical Models of
+                  Biological Systems at the Technical University of Munich and Scientific Director of
+                  the Helmholtz Artificial Intelligence Cooperation Unit (Helmholtz.AI). He holds
+                  Diplomas in Mathematics and Physics and Doctorates in Physics and Computer Science.
+                </p>
+              </details>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="chair">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Workshop chair</h2>
+          <p class="section-intro">
+            Scientific organisation and workshop coordination.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <div>
+            <strong>Frederikke Isa Marin</strong>
+            <p>
+              Postdoctoral Researcher · Machine Learning<br>
+              Department of Computer Science<br>
+              University of Copenhagen
+            </p>
+          </div>
+
+          <div>
+            <strong>Contact</strong>
+            <p><a href="mailto:fim@di.ku.dk">fim@di.ku.dk</a></p>
+          </div>
+
+          <div>
+            <strong>Workshop</strong>
+            <p>Biological Foundation Models and the Virtual Cell<br>21 September 2026</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practical">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Practical</h2>
+          <p class="section-intro">
+            The workshop is a closed, full-day event in central Copenhagen. Lunch and dinner are included.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <div>
+            <strong>Date & time</strong>
+            <p>Monday, 21 September 2026<br>Arrival from 10:30</p>
+          </div>
+
+          <div>
+            <strong>Venue</strong>
+            <p>Pioneer Centre<br>Copenhagen, Denmark<br>Room details forthcoming</p>
+          </div>
+
+          <div>
+            <strong>Meals</strong>
+            <p>Lunch is included. Dinner is planned at a restaurant from approximately 19:30–20:00.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Biological Foundation Models and the Virtual Cell · 21 September 2026 · Copenhagen
+    </div>
+  </footer>
+</body>
+</html>
