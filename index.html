@@ -355,6 +355,67 @@
       font-size: .94rem;
     }
 
+    .map-card {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .map-frame {
+      width: 100%;
+      min-height: 430px;
+      border: 0;
+      display: block;
+    }
+
+    .map-info {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .map-info h3 {
+      margin-bottom: 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.7rem;
+      font-weight: 500;
+      line-height: 1.15;
+    }
+
+    .map-info p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .map-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .map-action {
+      display: inline-block;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--green);
+      color: #fff;
+      font-size: .9rem;
+      font-weight: 760;
+      text-decoration: none;
+    }
+
+    .map-action.secondary {
+      background: transparent;
+      color: var(--green);
+      border: 1px solid var(--green);
+    }
+
     .info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -491,6 +552,9 @@
 
       .chair-grid { grid-template-columns: 1fr; }
 
+      .map-card { grid-template-columns: 1fr; }
+      .map-frame { min-height: 330px; }
+
       .info-grid { grid-template-columns: 1fr; }
     }
 
@@ -520,6 +584,7 @@
         <a href="#program">Program</a>
         <a href="#speakers">Speakers</a>
         <a href="#chair">Chair</a>
+        <a href="#find-us">Find us</a>
         <a href="#practical">Practical</a>
       </div>
     </nav>
@@ -617,14 +682,14 @@
           </div>
 
           <div class="slot">
-            <div class="time">11:00–11:40</div>
-            <div><h3>Henrik Nielsen · Talk title forthcoming</h3><p>Invited talk and discussion.</p></div>
+            <div class="time">11:00–11:30</div>
+            <div><h3>Henrik Nielsen · NetStart and DeepCDS: using protein language models to recognize coding sequences</h3><p>Invited talk and discussion.</p></div>
             <span class="tag">Talk</span>
           </div>
 
           <div class="slot">
-            <div class="time">11:40–12:30</div>
-            <div><h3>Jakob Skou Pedersen · Aarhus University · Detecting cancer from blood samples — promises and challenges of generative models for cell-free DNA</h3><p>Invited talk and discussion.</p></div>
+            <div class="time">11:40–12:20</div>
+            <div><h3>Richard Krieg · University of Greifswald · Vipsania: Unsupervised Deep Gene Finding</h3><p>Invited talk and discussion.</p></div>
             <span class="tag">Talk</span>
           </div>
 
@@ -641,25 +706,25 @@
           </div>
 
           <div class="slot">
-            <div class="time">14:00–14:50</div>
+            <div class="time">14:10–15:00</div>
             <div><h3>Elijah Cole · GenBio AI · Virtual Cells Must Be Stateful, Multimodal, and Multiscale</h3><p>Invited talk and discussion.</p></div>
             <span class="tag">Talk</span>
           </div>
 
           <div class="slot meal">
-            <div class="time">14:50–15:15</div>
+            <div class="time">15:00–15:25</div>
             <div><h3>Coffee &amp; cake</h3><p>Refreshments and informal conversation.</p></div>
             <span class="tag">Break</span>
           </div>
 
           <div class="slot">
-            <div class="time">15:15–16:05</div>
+            <div class="time">15:25–16:15</div>
             <div><h3>Emily Jin · Ellison Institute of Technology · Monera: Learning Bacterial Biology at Full-Genome Scale</h3><p>Invited talk and discussion.</p></div>
             <span class="tag">Talk</span>
           </div>
 
           <div class="slot meal">
-            <div class="time">16:05–17:30</div>
+            <div class="time">16:15–17:30</div>
             <div><h3>Coffee, posters &amp; discussion</h3><p>Refreshments, posters and informal scientific discussion.</p></div>
             <span class="tag">Posters</span>
           </div>
@@ -678,7 +743,7 @@
 
           <div class="slot meal">
             <div class="time">19:30–20:00</div>
-            <div><h3>Workshop dinner</h3><p>Restaurant details forthcoming.</p></div>
+            <div><h3>Workshop dinner · Pastis</h3><p>Pastis · Gothersgade 52, 1123 Copenhagen.</p></div>
             <span class="tag">Dinner</span>
           </div>
         </div>
@@ -742,7 +807,7 @@
               <p class="speaker-kicker">Invited speaker</p>
               <h3>Henrik Nielsen</h3>
               <p class="affiliation">Associate Professor · DTU Health Tech</p>
-              <p class="talk-title">Talk title forthcoming</p>
+              <p class="talk-title">NetStart and DeepCDS: using protein language models to recognize coding sequences</p>
 
               <details>
                 <summary>Abstract</summary>
@@ -962,6 +1027,52 @@
       </div>
     </section>
 
+    <section id="find-us">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Find us</h2>
+          <p class="section-intro">
+            The workshop takes place at the Pioneer Centre for AI in the Observatory in Copenhagen's Botanical Garden.
+          </p>
+        </div>
+
+        <div class="map-card">
+          <iframe
+            class="map-frame"
+            title="Map showing the Pioneer Centre for AI"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=%C3%98ster%20Voldgade%203%2C%201350%20Copenhagen%2C%20Denmark&output=embed">
+          </iframe>
+
+          <div class="map-info">
+            <h3>Pioneer Centre for AI</h3>
+            <p>
+              The Observatory in the Botanical Garden<br>
+              Øster Voldgade 3<br>
+              1350 Copenhagen, Denmark
+            </p>
+            <p>
+              The Centre is close to Nørreport Station. If you are visiting for the first time,
+              press the bell at the gate marked <strong>Pioneer Centre for AI</strong> to be let in.
+            </p>
+            <p>
+              Nørreport and Østerport stations are both within walking distance.
+            </p>
+
+            <div class="map-actions">
+              <a class="map-action"
+                 href="https://www.google.com/maps/search/?api=1&query=%C3%98ster%20Voldgade%203%2C%201350%20Copenhagen%2C%20Denmark"
+                 target="_blank" rel="noreferrer">Open map</a>
+              <a class="map-action secondary"
+                 href="https://www.aicentre.dk/find-us"
+                 target="_blank" rel="noreferrer">Find us / arrival guide</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="practical">
       <div class="wrap">
         <div class="section-head">
@@ -979,12 +1090,12 @@
 
           <div>
             <strong>Venue</strong>
-            <p>Pioneer Centre<br>Copenhagen, Denmark<br>Room details forthcoming</p>
+            <p>Pioneer Centre for AI<br>The Observatory, Botanical Garden<br>Øster Voldgade 3, 1350 Copenhagen</p>
           </div>
 
           <div>
             <strong>Meals</strong>
-            <p>Lunch is included. Dinner is planned at a restaurant from approximately 19:30–20:00.</p>
+            <p>Lunch is included. Dinner will be at Pastis, Gothersgade 52, from approximately 19:30–20:00.</p>
           </div>
         </div>
       </div>
